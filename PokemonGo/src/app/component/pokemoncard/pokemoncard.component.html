@@ -1,0 +1,61 @@
+<div class="row">
+    <!--Sorting-->
+    <form #f="ngForm" class="col-xl-3">
+        <select name="sortOptions" [(ngModel)]="sortOptions1" (change)="sortingfunction()">
+            <!-- <option value="" disabled>Choose your country</option> -->
+            <option *ngFor="let so of sortOptions" [value]="so.id">
+                {{ so.name }}
+            </option>
+        </select>
+    </form>
+    <!--Sorting-->
+    <!--Search-->
+        <div class="col-xl-3">
+            <input type="text" placeholder="Search"/>
+        </div>
+    <!--Search-->
+    <!---Pagination-->
+        <div class="col-xl-6">
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    <!--Pagination-->
+</div>
+
+    <div class="row" style="margin:30px 0px" *ngIf="pokemonData">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 card" style="width:20rem"  *ngFor="let i of pokemonData.results">
+            <ng-container *ngIf="i.pkData">
+                <img class="card-img-top" [src]= "i.pkData.sprites.front_default" alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{i.name | titlecase}}</h5>
+                    <p class="card-text">
+                        <span>Height:{{i.pkData.height}}</span><br/>
+                        <span>Weight:{{i.pkData.weight}}</span><br/>
+                        <span>
+                            Abilities:
+                            <ul>
+                                <li *ngFor="let ability of i.pkData.abilities">{{ability.ability.name}}</li>
+                            </ul>
+            
+                        </span><br/>
+                    </p>
+                    <a href="#" class="btn btn-primary">{{i.name | titlecase}} Details</a>
+                    </div>
+            </ng-container>
+          </div>
+    </div>
+    <div class="row">
+         <!---Pagination-->
+         <div class="col-xl-6">
+            <mat-paginator [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                aria-label="Select page">
+            </mat-paginator>
+        </div>
+    <!--Pagination-->
+    </div>
+
